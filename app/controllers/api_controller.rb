@@ -18,11 +18,10 @@ class ApiController < ApplicationController
   # include the top score for that user.
   def leaderboard
     level = Level.find_by!(number: params[:level_number])
-    higest_user_levels = level.user_levels.order(high_score: :desc).limit(5)
+    highest_user_levels = level.user_levels.order(high_score: :desc).limit(5)
     render json: {
       status: 'success',
-      leaderboard: higest_user_levels.map { |i| { user: i.user_id, score: i.high_score } }
-#      leaderboard: attempts.map { |a| { user: a.user_level.user_id, score: a.score } }
+      leaderboard: highest_user_levels.map { |i| { user: i.user_id, score: i.high_score } }
     }
   end
 
